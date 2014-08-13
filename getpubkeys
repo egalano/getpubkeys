@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+""" Lookup a user's GitHub public keys using the GitHub API
+Author: E.G. Galano <eg.galano@gmail.com>
+
+Usage: getpubkey [github_username]
+Tested  with Python2.7+, Python3.4+
+"""
+
+
+from __future__ import print_function
+import argparse
+import json
+import sys
+try:
+    from urllib2 import Request, urlopen
+except ImportError:
+    from urllib.request import Request, urlopen
+
+
+__VERSION__ = '1.0.0'
+
+
+def main():
+    parser = argparse.ArgumentParser("getpubkey", description="CLI to get a user's public key from the GitHub API")
+    parser.add_argument("-a", "--api-url", default="https://api.github.com",
+                        help="Override the api-url for GitHub Enterprise appliances")
+    parser.add_argument("user",
+                        help="User for whom to lookup public keys")
+    args = parser.parse_args()
+
+    api_url = "{}/users/{}/keys".format(args.api_url, args.user)
+    # Need to set a User-Agent or GitHub rejects the request
+    api_headers = {
+        "User-Agent": 'python-getpubkey-1.0.0'
+    }
+
+    req = Request(url=api_url, headers=api_headers)
+    try:
+        res = urlopen(req)
+    except Exception as e:
+        raise
+
+    res_data = res.read()
+    # Decode python3 bytes object
+    if isinstance(res_data, bytes):
+        res_data = res_data.decode('utf-8')
+
+    keys = json.loads(res_data)
+
+    # Casting to list to make 'map' python3 compatible
+    print("Public Keys for: {}".format(args.user))
+    list(map(lambda k: print('\n' + k.get("key", None)), keys))
+
+
+if __name__ == "__main__":
+    main()
