@@ -2,7 +2,7 @@
 """ Lookup a user's GitHub public keys using the GitHub API
 Author: E.G. Galano <eg.galano@gmail.com>
 
-Usage: getpubkey [github_username]
+Usage: getpubkeys [github_username]
 Tested  with Python2.7+, Python3.4+
 """
 
@@ -21,7 +21,7 @@ __VERSION__ = '1.0.0'
 
 
 def main():
-    parser = argparse.ArgumentParser("getpubkey", description="CLI to get a user's public key from the GitHub API")
+    parser = argparse.ArgumentParser("getpubkeys", description="CLI to get a user's public key from the GitHub API")
     parser.add_argument("-a", "--api-url", default="https://api.github.com",
                         help="Override the api-url for GitHub Enterprise appliances")
     parser.add_argument("user",
@@ -31,7 +31,7 @@ def main():
     api_url = "{}/users/{}/keys".format(args.api_url, args.user)
     # Need to set a User-Agent or GitHub rejects the request
     api_headers = {
-        "User-Agent": 'python-getpubkey-1.0.0'
+        "User-Agent": 'python-getpubkeys-1.0.0'
     }
 
     req = Request(url=api_url, headers=api_headers)
