@@ -12,12 +12,12 @@ None! This script only uses the Python standard library
 ./getpubkeys egalano
 ```
 
-######Lookup public keys for thatch
+######Look up public keys for thatch
 ```
 ./getpubkeys thatch
 ```
 
-######Lookup egalano's public keys from a GitHub Enterprise appliance
+######Look up egalano's public keys from a GitHub Enterprise appliance
 ```
 ./getpubkeys -a https://my-github.your-company.com egalano
 ```
