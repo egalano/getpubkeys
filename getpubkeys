@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-""" Lookup a user's GitHub public keys using the GitHub API
+"""
+Lookup a user's GitHub public keys using the GitHub API
 Author: E.G. Galano <eg.galano@gmail.com>
 
 Usage: getpubkeys [github_username]
