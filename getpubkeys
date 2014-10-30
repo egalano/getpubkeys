@@ -49,7 +49,6 @@ def main():
     keys = json.loads(res_data)
 
     # Casting to list to make 'map' python3 compatible
-    print("Public Keys for: {}".format(args.user))
     list(map(lambda k: print('\n' + k.get("key", None)), keys))
 
 
