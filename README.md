@@ -21,3 +21,8 @@ None! This script only uses the Python standard library
 ```
 ./getpubkeys -a https://my-github.your-company.com egalano
 ```
+
+######One-liner to add an existing user's keys to their .ssh/authorized_keys
+```
+#curl -sL https://raw.githubusercontent.com/egalano/getpubkeys/master/getpubkeys | python - egalano >> ~eg/.ssh/authorized_keys
+```
